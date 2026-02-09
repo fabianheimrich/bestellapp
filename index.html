@@ -4,298 +4,95 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BurgerHouse</title>
+
   <link rel="icon" href="images/favicon.png" sizes="any">
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 
 <body>
-  <!-- HEADER -->
   <header class="topbar">
     <div class="container">
       <div class="topbar__inner">
-        <a class="brand" href="#">
-          <img src="images/frame.png" alt="Logo" />
-        </a>
-        <button class="burger" type="button" aria-label="Menü öffnen">          
+        <a class="brand" href="#"><img src="images/frame.png" alt="Logo" /></a>
+        <button class="burger" type="button" aria-label="Menü öffnen">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- HERO auf 1440px begrenzt -->
   <section class="hero">
     <div class="container">
       <div class="hero__media" role="img" aria-label="Hero Bild"></div>
     </div>
-
     <div class="container">
       <div class="hero__card">
         <div class="hero__logo" aria-hidden="true">🍔</div>
-
         <h1 class="hero__title">
           Burger<span>House</span>
           <span class="hero__rating" aria-label="Bewertung 4.1 von 5">★ 4,1</span>
         </h1>
-
-        <p class="hero__subtitle">
-          The best of Burgers, Pizza, and Greens, all in one great place.
-        </p>
+        <p class="hero__subtitle">The best of Burgers, Pizza, and Greens, all in one great place.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTENT: links Menü + rechts Basket -->
   <main class="page">
     <div class="container">
       <div class="layout">
-        <!-- Linke Spalte: Menü -->
-        <div class="layout__menu">
+        <!-- Menü jetzt dynamisch -->
+        <div class="layout__menu" id="menuRoot"></div>
 
-          <!-- Burger & Sandwiches -->
-          <section class="menu-section" id="burger">
-            <div class="section-bar">
-              <div class="section-bar__left">
-                <span class="section-bar__icon" aria-hidden="true">🍔</span>
-                <h2 class="section-bar__title">Burger &amp; Sandwiches</h2>
-              </div>
-            </div>
-
-            <div class="menu-list">
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/burger1.jpg" alt="Veggie mushroom black burger"/>
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Veggie mushroom black burger</h3>
-                  <p class="menu-item__desc">Mixed green salad, Tomatoes, Edamame, Mushrooms</p>
-                  <div class="menu-item__actions">
-                    <button class="btn btn--ghost" type="button">Add to basket</button>
-                  </div>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">16,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/burger2.jpg" alt="All meat burger"/>
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">All meat burger</h3>
-                  <p class="menu-item__desc">Beef, Bacon, Dill pickles, Smoked cheese, Ketchup, BBQ sauce</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">15,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/burger3.jpg" alt="Beef red burger" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Beef red burger</h3>
-                  <p class="menu-item__desc">Beef, Cheese, Tomatoes, Lettuce, Onion</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">14,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/burger4.jpg" alt="Big chicken burger" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Big chicken burger</h3>
-                  <p class="menu-item__desc">Chicken, Cheese, Tomatoes, Lettuce, Onion, Bell pepper</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">15,90€</div>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <!-- Pizza (30cm) -->
-          <section class="menu-section" id="pizza">
-            <div class="section-bar">
-              <div class="section-bar__left">
-                <span class="section-bar__icon" aria-hidden="true">🍕</span>
-                <h2 class="section-bar__title">Pizza <span class="section-bar__note">(30cm)</span></h2>
-              </div>
-            </div>
-
-            <div class="menu-list">
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/pizza1.jpg" alt="Pizza Margherita" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Pizza Margherita</h3>
-                  <p class="menu-item__desc">Tomato Sauce, Mozzarella</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">11,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/pizza2.jpg" alt="Pizza Chorizo" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Pizza Chorizo</h3>
-                  <p class="menu-item__desc">Tomato slices, Mozzarella, Chorizo</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">13,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/pizza3.jpg" alt="Funghi" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Funghi</h3>
-                  <p class="menu-item__desc">Red onion, Olives, Button Mushrooms, Mozzarella</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">12,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/pizza4.jpg" alt="Quattro Formaggi with Chicken" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Quattro Formaggi with Chicken</h3>
-                  <p class="menu-item__desc">Chicken, Mozzarella, Gorgonzola, Fontina, Parmesan Reggiano</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">15,90€</div>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <!-- Salad -->
-          <section class="menu-section" id="salad">
-            <div class="section-bar">
-              <div class="section-bar__left">
-                <span class="section-bar__icon" aria-hidden="true">🥗</span>
-                <h2 class="section-bar__title">Salad</h2>
-              </div>
-            </div>
-
-            <div class="menu-list">
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/salad1.jpg" alt="Warm beef arugula salad" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Warm beef arugula salad</h3>
-                  <p class="menu-item__desc">Beef, Arugula field salad, Greek feta, Cherry tomatoes, Sundried Tomatoes, Balsamic vinaigrette</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">16,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/salad2.jpg" alt="Mini green Salad" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Mini green Salad</h3>
-                  <p class="menu-item__desc">Green salad, Cucumber, Carrots, Parsley, Radishes</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">7,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/salad3.jpg" alt="Green Salad with sea food" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Green Salad with sea food</h3>
-                  <p class="menu-item__desc">Mixed greens, Cherry tomatoes, Red onion, Mussels, Squid rings, Shrimp, Dijon mustard–lemon dressing with dill</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">16,90€</div>
-                </div>
-              </article>
-
-              <article class="menu-item">
-                <img class="menu-item__img" src="images/salad4.jpg" alt="Vegan green salad with tofu" />
-                <div class="menu-item__body">
-                  <h3 class="menu-item__name">Vegan green salad with tofu</h3>
-                  <p class="menu-item__desc">Green salad, Cherry tomatoes, Cucumber, Baby spinach, Coconut, Roasted sunflower, Nuts</p>
-                  <button class="btn btn--ghost" type="button">Add to basket</button>
-                </div>
-                <div class="menu-item__meta">
-                  <div class="menu-item__price">14,90€</div>
-                </div>
-              </article>
-            </div>
-          </section>
-        </div>
-
-        <!-- Rechte Spalte: Basket, nur zur Ansicht, muss interaktiv werden -->
+        <!-- Desktop Warenkorb jetzt dynamisch -->
         <aside class="layout__basket" aria-label="Warenkorb">
-          <div class="basket">
+          <div class="basket" id="desktopCart">
             <h3 class="basket__title">Your Basket</h3>
-
-            <div class="basket__items" role="list">
-              <div class="basket-item" role="listitem">
-                <div class="basket-item__row">
-                  <div class="basket-item__name">1 x Veggie mushroom black burger</div>
-                  <div class="basket-item__price">16,90€</div>
-                </div>
-                <div class="basket-item__controls">
-                  <button class="icon-btn" type="button" aria-label="Entfernen">🗑️</button>
-                  <button class="qty qty--sm" type="button" aria-label="Menge erhöhen">
-                    <span class="qty__value">1</span><span class="qty__plus">+</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="basket-item" role="listitem">
-                <div class="basket-item__row">
-                  <div class="basket-item__name">1 x Pizza Margherita</div>
-                  <div class="basket-item__price">11,90€</div>
-                </div>
-                <div class="basket-item__controls">
-                  <button class="icon-btn" type="button" aria-label="Entfernen">🗑️</button>
-                  <button class="qty qty--sm" type="button" aria-label="Menge erhöhen">
-                    <span class="qty__value">1</span><span class="qty__plus">+</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="basket-item" role="listitem">
-                <div class="basket-item__row">
-                  <div class="basket-item__name">1 x Mini green Salad</div>
-                  <div class="basket-item__price">7,90€</div>
-                </div>
-                <div class="basket-item__controls">
-                  <button class="icon-btn" type="button" aria-label="Entfernen">🗑️</button>
-                  <button class="qty qty--sm" type="button" aria-label="Menge erhöhen">
-                    <span class="qty__value">1</span><span class="qty__plus">+</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <div class="basket__items" id="desktopCartItems" role="list"></div>
 
             <div class="basket__totals">
-              <div class="basket__line"><span>Subtotal</span><span>36,70</span></div>
-              <div class="basket__line"><span>Delivery fee</span><span>4,99€</span></div>
+              <div class="basket__line"><span>Subtotal</span><span id="desktopSubtotal">0,00€</span></div>
+              <div class="basket__line"><span>Delivery fee</span><span id="desktopDelivery">4,99€</span></div>
               <div class="basket__divider"></div>
-              <div class="basket__line basket__line--total"><span>Total</span><span>41,69€</span></div>
+              <div class="basket__line basket__line--total"><span>Total</span><span id="desktopTotal">0,00€</span></div>
             </div>
 
-            <button class="basket__cta" type="button">Buy now (41,69€)</button>
+            <button class="basket__cta" id="desktopOrderBtn" type="button">Buy now (0,00€)</button>
           </div>
         </aside>
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Mobile: Button + Modal -->
+  <button class="cartFab" id="cartFab" type="button" aria-label="Warenkorb öffnen">
+    <span class="cartFab__label">Basket</span>
+    <span class="cartFab__total" id="fabTotal">0,00€</span>
+  </button>
+
+  <div class="cartModal" id="cartModal" aria-hidden="true">
+    <div class="cartModal__backdrop" data-close="true"></div>
+    <div class="cartModal__panel" role="dialog" aria-modal="true" aria-label="Warenkorb Dialog">
+      <div class="cartModal__header">
+        <h3 class="cartModal__title">Your Basket</h3>
+        <button class="iconBtn iconBtn--dark" type="button" data-close="true" aria-label="Schließen">✕</button>
+      </div>
+
+      <div class="cartModal__items" id="mobileCartItems" role="list"></div>
+
+      <div class="cartModal__totals">
+        <div class="basket__line"><span>Subtotal</span><span id="mobileSubtotal">0,00€</span></div>
+        <div class="basket__line"><span>Delivery fee</span><span id="mobileDelivery">4,99€</span></div>
+        <div class="basket__divider"></div>
+        <div class="basket__line basket__line--total"><span>Total</span><span id="mobileTotal">0,00€</span></div>
+      </div>
+
+      <button class="basket__cta" id="mobileOrderBtn" type="button">Buy now (0,00€)</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
