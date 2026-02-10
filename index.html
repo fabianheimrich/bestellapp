@@ -11,10 +11,13 @@
 </head>
 
 <body>
+  <!-- HEADER -->
   <header class="topbar">
     <div class="container">
       <div class="topbar__inner">
-        <a class="brand" href="#"><img src="images/frame.png" alt="Logo" /></a>
+        <a class="brand" href="#">
+          <img src="images/frame.png" alt="Logo" />
+        </a>
         <button class="burger" type="button" aria-label="Menü öffnen">
           <span></span><span></span><span></span>
         </button>
@@ -22,32 +25,40 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <div class="hero__media" role="img" aria-label="Hero Bild"></div>
     </div>
+
     <div class="container">
       <div class="hero__card">
         <div class="hero__logo" aria-hidden="true">🍔</div>
+
         <h1 class="hero__title">
           Burger<span>House</span>
           <span class="hero__rating" aria-label="Bewertung 4.1 von 5">★ 4,1</span>
         </h1>
-        <p class="hero__subtitle">The best of Burgers, Pizza, and Greens, all in one great place.</p>
+
+        <p class="hero__subtitle">
+          The best of Burgers, Pizza, and Greens, all in one great place.
+        </p>
       </div>
     </div>
   </section>
 
+  <!-- CONTENT -->
   <main class="page">
     <div class="container">
       <div class="layout">
-        <!-- Menü jetzt dynamisch -->
+        <!-- Linke Spalte: Menü -->
         <div class="layout__menu" id="menuRoot"></div>
 
-        <!-- Desktop Warenkorb jetzt dynamisch -->
+        <!-- Rechte Spalte: Warenkorb -->
         <aside class="layout__basket" aria-label="Warenkorb">
           <div class="basket" id="desktopCart">
             <h3 class="basket__title">Your Basket</h3>
+
             <div class="basket__items" id="desktopCartItems" role="list"></div>
 
             <div class="basket__totals">
@@ -64,14 +75,16 @@
     </div>
   </main>
 
-  <!-- Mobile: Button + Modal -->
+  <!-- MOBILE: Button unten mittig (öffnet Dialog) -->
   <button class="cartFab" id="cartFab" type="button" aria-label="Warenkorb öffnen">
     <span class="cartFab__label">Basket</span>
     <span class="cartFab__total" id="fabTotal">0,00€</span>
   </button>
 
+  <!-- MOBILE: Dialog/Modal Warenkorb -->
   <div class="cartModal" id="cartModal" aria-hidden="true">
     <div class="cartModal__backdrop" data-close="true"></div>
+
     <div class="cartModal__panel" role="dialog" aria-modal="true" aria-label="Warenkorb Dialog">
       <div class="cartModal__header">
         <h3 class="cartModal__title">Your Basket</h3>
@@ -91,8 +104,10 @@
     </div>
   </div>
 
+  <!-- Toast -->
   <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
