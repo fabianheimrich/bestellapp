@@ -1,16 +1,43 @@
 const deliveryFee = 4.99;
 
 const menuData = [
-  { id: "burger", title: "Burger & Sandwiches", icon: "🍔", items: [
-    { id: "b1", name: "Veggie mushroom black burger", desc: "Mixed green salad, Tomatoes, Edamame, Mushrooms", price: 16.9, image: "images/burger1.jpg" },
-    { id: "b2", name: "All meat burger", desc: "Beef, Bacon, Dill pickles, Smoked cheese, Ketchup, BBQ sauce", price: 15.9, image: "images/burger2.jpg" },
-  ]},
-  { id: "pizza", title: "Pizza", icon: "🍕", note: "(30cm)", items: [
-    { id: "p1", name: "Pizza Margherita", desc: "Tomato Sauce, Mozzarella", price: 11.9, image: "images/pizza1.jpg" },
-  ]},
-  { id: "salad", title: "Salad", icon: "🥗", items: [
-    { id: "s2", name: "Mini green Salad", desc: "Green salad, Cucumber, Carrots, Parsley, Radishes", price: 7.9, image: "images/salad2.jpg" },
-  ]},
+  {
+    id: "burger",
+    title: "Burger & Sandwiches",
+    icon: "🍔",
+    items: [
+      { id: "b1", name: "Veggie mushroom black burger", desc: "Mixed green salad, Tomatoes, Edamame, Mushrooms", price: 16.9, image: "images/burger1.jpg" },
+      { id: "b2", name: "All meat burger", desc: "Beef, Bacon, Dill pickles, Smoked cheese, Ketchup, BBQ sauce", price: 15.9, image: "images/burger2.jpg" },
+      { id: "b3", name: "Beef red burger", desc: "Beef, Cheese, Tomatoes, Lettuce, Onion", price: 14.9, image: "images/burger3.jpg" },
+      { id: "b4", name: "Big chicken burger", desc: "Chicken, Cheese, Tomatoes, Lettuce, Onion, Bell pepper", price: 15.9, image: "images/burger4.jpg" },
+      { id: "b5", name: "Cheese bacon burger", desc: "Beef, Bacon, Cheddar, Onion, House sauce", price: 16.4, image: "images/burger1.jpg" },
+    ],
+  },
+  {
+    id: "pizza",
+    title: "Pizza",
+    icon: "🍕",
+    note: "(30cm)",
+    items: [
+      { id: "p1", name: "Pizza Margherita", desc: "Tomato Sauce, Mozzarella", price: 11.9, image: "images/pizza1.jpg" },
+      { id: "p2", name: "Pizza Chorizo", desc: "Tomato slices, Mozzarella, Chorizo", price: 13.9, image: "images/pizza2.jpg" },
+      { id: "p3", name: "Funghi", desc: "Red onion, Olives, Button Mushrooms, Mozzarella", price: 12.9, image: "images/pizza3.jpg" },
+      { id: "p4", name: "Quattro Formaggi with Chicken", desc: "Chicken, Mozzarella, Gorgonzola, Fontina, Parmesan Reggiano", price: 15.9, image: "images/pizza4.jpg" },
+      { id: "p5", name: "Prosciutto", desc: "Tomato Sauce, Mozzarella, Ham", price: 14.2, image: "images/pizza1.jpg" },
+    ],
+  },
+  {
+    id: "salad",
+    title: "Salad",
+    icon: "🥗",
+    items: [
+      { id: "s1", name: "Warm beef arugula salad", desc: "Beef, Arugula field salad, Greek feta, Cherry tomatoes, Sundried Tomatoes, Balsamic vinaigrette", price: 16.9, image: "images/salad1.jpg" },
+      { id: "s2", name: "Mini green Salad", desc: "Green salad, Cucumber, Carrots, Parsley, Radishes", price: 7.9, image: "images/salad2.jpg" },
+      { id: "s3", name: "Green Salad with sea food", desc: "Mixed greens, Cherry tomatoes, Red onion, Mussels, Squid rings, Shrimp, Dijon mustard–lemon dressing with dill", price: 16.9, image: "images/salad3.jpg" },
+      { id: "s4", name: "Vegan green salad with tofu", desc: "Green salad, Cherry tomatoes, Cucumber, Baby spinach, Coconut, Roasted sunflower, Nuts", price: 14.9, image: "images/salad4.jpg" },
+      { id: "s5", name: "Chicken caesar salad", desc: "Romaine, Chicken, Parmesan, Croutons, Caesar dressing", price: 13.5, image: "images/salad1.jpg" },
+    ],
+  },
 ];
 
 const cart = {};
@@ -77,8 +104,7 @@ function onCartClick(e) {
 function runCartAction(action, id) {
   if (action === "inc") changeQty(id, 1);
   if (action === "dec") changeQty(id, -1);
-  if (action === "remove") delete cart[id];
-  renderCart();
+  if (action === "remove") removeItem(id);
 }
 
 function changeQty(id, delta) {
@@ -88,12 +114,21 @@ function changeQty(id, delta) {
   renderCart();
 }
 
+function removeItem(id) {
+  delete cart[id];
+  renderCart();
+}
+
 function onOrder() {
   if (getCartCount() === 0) return showToast("Warenkorb ist leer.");
-  Object.keys(cart).forEach((k) => delete cart[k]);
+  clearCart();
   closeModal();
-  renderCart();
   showToast("Testbestellung durchgeführt. Vielen Dank!");
+}
+
+function clearCart() {
+  Object.keys(cart).forEach((k) => delete cart[k]);
+  renderCart();
 }
 
 function openModal() {
@@ -126,7 +161,9 @@ function sectionTemplate(section) {
   return `
     <section class="menu-section" id="${section.id}">
       ${sectionBarTemplate(section)}
-      <div class="menu-list">${section.items.map(menuItemTemplate).join("")}</div>
+      <div class="menu-list">
+        ${section.items.map(menuItemTemplate).join("")}
+      </div>
     </section>
   `;
 }
@@ -153,48 +190,61 @@ function menuItemTemplate(item) {
       </div>
       <div class="menu-item__meta">
         <div class="menu-item__price">${formatEur(item.price)}</div>
-        <button class="addBtn" type="button" data-add-id="${item.id}">+</button>
+        <button class="addBtn" type="button" data-add-id="${item.id}" aria-label="Hinzufügen">+</button>
       </div>
     </article>
   `;
 }
 
 function renderCart() {
-  const items = Object.keys(cart).map((id) => ({ ...itemById[id], id, qty: cart[id] }));
-  const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
-  const total = subtotal > 0 ? subtotal + deliveryFee : 0;
+  const items = getCartItems();
+  const subtotal = calcSubtotal(items);
+  const total = calcTotal(subtotal);
+  renderCartLists(items);
+  renderTotals(subtotal, total);
+  renderFab(total);
+  renderBuyButtons(total);
+}
+
+function getCartItems() {
+  return Object.keys(cart).map((id) => ({ ...itemById[id], id, qty: cart[id] }));
+}
+
+function calcSubtotal(items) {
+  return items.reduce((sum, it) => sum + it.price * it.qty, 0);
+}
+
+function calcTotal(subtotal) {
+  return subtotal > 0 ? subtotal + deliveryFee : 0;
+}
+
+function renderCartLists(items) {
   const html = items.length ? items.map(cartItemTemplate).join("") : emptyCartTemplate();
   els.desktopCartItems.innerHTML = html;
   els.mobileCartItems.innerHTML = html;
-  setTotals("desktop", subtotal, subtotal > 0 ? deliveryFee : 0, total);
-  setTotals("mobile", subtotal, subtotal > 0 ? deliveryFee : 0, total);
-  els.fabTotal.textContent = formatEur(total);
-  const text = `Buy now (${formatEur(total)})`;
-  els.desktopOrderBtn.textContent = text;
-  els.mobileOrderBtn.textContent = text;
 }
 
 function cartItemTemplate(item) {
   return `
-    <div class="basket-item">
+    <div class="basket-item" role="listitem">
       <div class="basket-item__row">
         <div class="basket-item__name">${item.qty} x ${escapeHtml(item.name)}</div>
         <div class="basket-item__price">${formatEur(item.price * item.qty)}</div>
       </div>
       <div class="basket-item__controls">
-        ${qtyTemplate(item.id, item.qty)}
-        <button class="iconBtn" data-action="remove" data-id="${item.id}">🗑️</button>
+        ${cartQtyTemplate(item.id, item.qty)}
+        <button class="iconBtn" type="button" data-action="remove" data-id="${item.id}" aria-label="Löschen">🗑️</button>
       </div>
     </div>
   `;
 }
 
-function qtyTemplate(id, qty) {
+function cartQtyTemplate(id, qty) {
   return `
     <div class="qty">
-      <button class="iconBtn" data-action="dec" data-id="${id}">−</button>
+      <button class="iconBtn" type="button" data-action="dec" data-id="${id}" aria-label="Verringern">−</button>
       <span class="qty__value">${qty}</span>
-      <button class="iconBtn" data-action="inc" data-id="${id}">+</button>
+      <button class="iconBtn" type="button" data-action="inc" data-id="${id}" aria-label="Erhöhen">+</button>
     </div>
   `;
 }
@@ -203,10 +253,26 @@ function emptyCartTemplate() {
   return `<div class="basket-item"><div class="basket-item__name">Dein Warenkorb ist leer.</div></div>`;
 }
 
+function renderTotals(subtotal, total) {
+  const del = subtotal > 0 ? deliveryFee : 0;
+  setTotals("desktop", subtotal, del, total);
+  setTotals("mobile", subtotal, del, total);
+}
+
 function setTotals(prefix, subtotal, del, total) {
   document.getElementById(`${prefix}Subtotal`).textContent = formatEur(subtotal);
   document.getElementById(`${prefix}Delivery`).textContent = formatEur(del);
   document.getElementById(`${prefix}Total`).textContent = formatEur(total);
+}
+
+function renderFab(total) {
+  els.fabTotal.textContent = formatEur(total);
+}
+
+function renderBuyButtons(total) {
+  const text = `Buy now (${formatEur(total)})`;
+  els.desktopOrderBtn.textContent = text;
+  els.mobileOrderBtn.textContent = text;
 }
 
 function getCartCount() {
@@ -233,4 +299,3 @@ function escapeHtml(str) {
     "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;",
   }[m]));
 }
-
